@@ -157,7 +157,7 @@ const translations = {
     },
     'address': {
         'es': 'Calle Alcanfores 957 Dpto 202 - Miraflores, Lima, Perú.',
-        'en': 'Alcanfores Street 957 Apt 202 - Miraflores, Lima, Peru.'
+        'en': 'Alcanfores Street 957 Apt 202 - Miraflores, Lima, Peru. (Calle Alcanfores 957 Dpto 202 - Miraflores, Lima, Perú.)'
     },
     'needHelp': {
         'es': '¿Necesitas ayuda?',
@@ -180,8 +180,8 @@ const translations = {
         'en': 'WHATSAPP'
     },
     'phoneNumber': {
-        'es': '970 339 122',
-        'en': '970 339 122'
+        'es': '+51 970 339 122',
+        'en': '+51 970 339 122'
     }
 };
 
