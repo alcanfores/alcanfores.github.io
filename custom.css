@@ -124,6 +124,8 @@ ul{
 .language-label {
     font-weight: bold;
     margin: 0 10px;
+    color: #005f94;
+    font-size: 14px;
 }
 
 .language-switch {
@@ -144,6 +146,7 @@ ul{
     border-radius: 15px;
     cursor: pointer;
     overflow: hidden;
+    border: 0.5px solid;
 }
 
 .toggle-label:before {
@@ -193,6 +196,14 @@ ul{
     opacity: 1;
 }
 
+.reglas h2, .instrucciones h2, .contacto h2, .contacto h3{
+    color: #005f94;
+}
+
+li{
+    margin-bottom: 20px;
+}
+
 /* Para móviles */
 @media (max-width: 768px) {
     .instrucciones.grid-container {
@@ -209,3 +220,4 @@ ul{
         font-size: 20px;
     }
 }
+

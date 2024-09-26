@@ -40,12 +40,12 @@ const translations = {
         'en': 'Maximum 4 people'
     },
     'bedroomOccupancy': {
-        'es': '2 personas en la cama matrimonial del cuarto principal.',
-        'en': '2 people in the double bed of the main room.'
+        'es': '2 personas en la cama matrimonial (2 plazas) del cuarto principal.',
+        'en': '2 people in the double bed (full size) of the main bedroom.'
     },
     'bunkBedOccupancy': {
-        'es': 'En la cama doble, 1 persona arriba, otra abajo.',
-        'en': 'In the bunk bed, 1 person on top, another below.'
+        'es': 'En la cama tipo nido o cama con cama auxiliar (2 camas, una debajo de la otra, de 1.5 plazas cada una), 1 persona en la cama principal, otra en la cama auxiliar.',
+        'en': 'On the trundle bed (2 beds, one under the other, each 1.5 size), 1 person on the main bed, another on the pull-out bed.'
     },
     'harmonyRules': {
         'es': '3. Convivamos en Armonía',
