@@ -189,7 +189,7 @@ const translations = {
     },
     'howToEnter': {
         'es': 'Cómo ingresar al departamento⚠️',
-        'en': 'How to enter the apartment'
+        'en': 'How to enter the apartment⚠️'
     },
     'thermaWarning': {
         'es': '⚠️Por favor no usar la Potencia 8 (P8) en las thermas⚠️',
@@ -260,6 +260,9 @@ function toggleLanguage() {
     
     // Cambia la imagen del WiFi
     toggleWifiImage();
+
+    // Cambia los videos
+    toggleVideos();
 }
 
 function translatePage() {
@@ -292,3 +295,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const languageToggle = document.getElementById('language-toggle');
     languageToggle.addEventListener('change', toggleLanguage);
 });
+
+function toggleVideos() {
+    const esVideos = document.querySelectorAll('.video-es');
+    const enVideos = document.querySelectorAll('.video-en');
+    const esBtns = document.querySelectorAll('.youtube-btn-es');
+    const enBtns = document.querySelectorAll('.youtube-btn-en');
+    
+    if (currentLang === 'en') {
+        esVideos.forEach(video => video.style.display = 'none');
+        enVideos.forEach(video => video.style.display = 'block');
+        esBtns.forEach(btn => btn.style.display = 'none');
+        enBtns.forEach(btn => btn.style.display = 'inline-block');
+    } else {
+        esVideos.forEach(video => video.style.display = 'block');
+        enVideos.forEach(video => video.style.display = 'none');
+        esBtns.forEach(btn => btn.style.display = 'inline-block');
+        enBtns.forEach(btn => btn.style.display = 'none');
+    }
+}
