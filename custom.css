@@ -208,6 +208,67 @@ li{
     margin-bottom: 20px;
 }
 
+/* Estilos para la sección de videos */
+.videos-section {
+    margin-bottom: 30px;
+}
+
+.videos-section h2, .videos-section p {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.videos-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.video-item {
+    flex: 0 1 calc(33.33% - 20px);
+    max-width: 280px;
+    margin-bottom: 20px;
+}
+
+.video-item h3 {
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.video-item iframe {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    max-height: 498px;
+}
+
+.youtube-btn {
+    display: inline-block;
+    background-color: #FF0000;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.youtube-btn:hover {
+    background-color: #CC0000;
+}
+
+@media (max-width: 992px) {
+    .video-item {
+        flex: 0 1 calc(50% - 15px);
+    }
+}
+
+@media (max-width: 768px) {
+    .video-item {
+        flex: 0 1 100%;
+        margin: 0 auto 20px;
+    }
+}
+
+
 /* Para móviles */
 @media (max-width: 768px) {
     .instrucciones.grid-container {

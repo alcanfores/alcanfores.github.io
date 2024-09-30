@@ -182,6 +182,34 @@ const translations = {
     'phoneNumber': {
         'es': '+51 970 339 122',
         'en': '+51 970 339 122'
+    },
+    'mandatoryVideos': {
+    'es': 'Es obligatorio ver estos videos (1 min c/u) ANTES de llegar al departamento',
+    'en': 'It is mandatory to watch these videos (1 min each) BEFORE arriving at the apartment'
+    },
+    'howToEnter': {
+        'es': 'Cómo ingresar al departamento⚠️',
+        'en': 'How to enter the apartment'
+    },
+    'thermaWarning': {
+        'es': '⚠️Por favor no usar la Potencia 8 (P8) en las thermas⚠️',
+        'en': '⚠️Please do not use Power 8 (P8) on the water heaters⚠️'
+    },
+    'howToShower': {
+        'es': '¿Cómo ducharse con agua caliente?',
+        'en': 'How to shower with hot water?'
+    },
+    'howToShowerMaster': {
+        'es': '¿Y en el Dormitorio Principal?',
+        'en': 'What about the Master Bedroom?'
+    },
+    'openYoutube': {
+        'es': 'Abrir en Youtube',
+        'en': 'Open on Youtube'
+    },
+    'desc-thermaWarning': {
+    'es': 'De hacerlo, se puede ir la luz en el departamento por la gran cantidad de electricidad que consume',
+    'en': 'Doing so may cause a power outage in the apartment due to the large amount of electricity it consumes'
     }
 };
 
