@@ -51,6 +51,10 @@ const translations = {
         'es': '3. Convivamos en Armonía',
         'en': '3. Let\'s live in Harmony'
     },
+    'dontUseBothThermas': {
+    'es': '🛑Porfavor NO USAR LAS 2 THERMAS AL MISMO TIEMPO🛑</span>',
+    'en': '🛑Please DO NOT USE BOTH WATER HEATERS AT THE SAME TIME🛑</span>'
+    },
     'noParties': {
         'es': 'No están permitidas las fiestas',
         'en': 'Parties are not allowed'
@@ -82,6 +86,14 @@ const translations = {
     'dontUseP8': {
         'es': '<strong class="importante">NO UTILICES LA POTENCIA 8 (P8)</strong>, ya que se puede ir la luz en el departamento.',
         'en': '<strong class="importante">DO NOT USE POWER 8 (P8)</strong>, as it may cause a power outage in the apartment.'
+    },
+    'notatonce': {
+        'es': '<strong class="importante">NO UTILICES LAS 2 thermas al MISMO tiempo</strong>, ya que se puede ir la luz en el departamento.',
+        'en': '<strong class="importante">DO NOT USE BOTH WATER HEATERS AT THE SAME TIME</strong>, as it may cause a power outage in the apartment.'
+    },
+    'TowelsHand': {
+        'es': 'Está prohibido usar las toallas de manos para los pies. Esto puede incurrir en costo por reposición.',
+        'en': 'It is forbidden to use hand towels for the feet. This may incur a replacement cost.'
     },
     'useDesignatedContainers': {
         'es': 'Utiliza los contenedores designados',
