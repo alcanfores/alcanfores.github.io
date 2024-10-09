@@ -87,10 +87,6 @@ const translations = {
         'es': '<strong class="importante">NO UTILICES LA POTENCIA 8 (P8)</strong>, ya que se puede ir la luz en el departamento.',
         'en': '<strong class="importante">DO NOT USE POWER 8 (P8)</strong>, as it may cause a power outage in the apartment.'
     },
-    'notatonce': {
-        'es': '<strong class="importante">NO UTILICES LAS 2 thermas al MISMO tiempo</strong>, ya que se puede ir la luz en el departamento.',
-        'en': '<strong class="importante">DO NOT USE BOTH WATER HEATERS AT THE SAME TIME</strong>, as it may cause a power outage in the apartment.'
-    },
     'TowelsHand': {
         'es': 'Está prohibido usar las toallas de manos para los pies. Esto puede incurrir en costo por reposición.',
         'en': 'It is forbidden to use hand towels for the feet. This may incur a replacement cost.'
