@@ -3,8 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reglas y guías esenciales para huéspedes de Airbnb en Miraflores, Lima. Información sobre check-in, WiFi, agua caliente, normas de convivencia y contacto.">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FF5A5F'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z'/%3E%3C/svg%3E" type="image/svg+xml">
+    
+    <!-- Preconnect to external domains for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.youtube.com">
+    <link rel="preconnect" href="https://i.ytimg.com">
+    
+    <!-- Preload critical image with high priority -->
+    <link rel="preload" href="/frontis.webp" as="image" fetchpriority="high">
+    
+    <!-- Load font with swap display for better FCP -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
     <title>Airbnb - Alcanfores Rules</title>
+    
+    <!-- Critical CSS inlined for faster FCP -->
     <style>
         *{margin:0;padding:0;box-sizing:border-box;}
         body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#2c3e50;background:#f8f9fa;}
@@ -13,23 +29,9 @@
         .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-bottom:30px;}
         .hero-text{text-align:left;}
         .hero-image{text-align:center;}
-        .hero-image img{max-width:100%;height:auto;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.3);}
+        .hero-image img{max-width:100%;height:auto;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.3);width:100%;aspect-ratio:16/9;object-fit:cover;}
         .hero h1{font-size:3rem;font-weight:800;margin-bottom:16px;text-shadow:0 2px 4px rgba(0,0,0,0.3);}
         .hero p{font-size:1.2rem;opacity:0.9;margin-bottom:0;}
-        .language-switch-container{display:flex;align-items:center;justify-content:center;margin:20px 0;}
-        .language-label{font-weight:bold;margin:0 10px;color:white;font-size:14px;}
-        .language-switch{position:relative;width:60px;height:30px;}
-        .toggle-checkbox{display:none;}
-        .toggle-label{position:relative;display:block;height:100%;background:#e0e0e0;border-radius:15px;cursor:pointer;overflow:hidden;border:0.5px solid rgba(255,255,255,0.3);}
-        .toggle-label:before{content:'';position:absolute;top:2px;left:2px;width:26px;height:26px;border-radius:13px;background:white;transition:0.3s;z-index:2;box-shadow:0 4px 8px rgba(0,0,0,0.3);}
-        .toggle-checkbox:checked + .toggle-label:before{left:calc(100% - 28px);}
-        .toggle-spanish,.toggle-english{position:absolute;top:0;width:50%;height:100%;transition:opacity 0.3s ease;display:flex;align-items:center;justify-content:center;font-size:16px;}
-        .toggle-spanish{right:0;}
-        .toggle-spanish::after{content:"🇺🇸";}
-        .toggle-english{left:0;opacity:0;}
-        .toggle-english::after{content:"🇪🇸";}
-        .toggle-checkbox:checked + .toggle-label .toggle-spanish{opacity:0;}
-        .toggle-checkbox:checked + .toggle-label .toggle-english{opacity:1;}
         .container{max-width:1200px;margin:0 auto;padding:0 20px;}
         .content{background:white;margin:-40px auto 0;border-radius:20px 20px 0 0;position:relative;z-index:2;box-shadow:0 -10px 40px rgba(0,0,0,0.1);}
         .section{padding:40px;border-bottom:1px solid #ecf0f1;}
@@ -37,80 +39,32 @@
         .section-header{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
         .section-icon{font-size:2rem;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.1));}
         .section-title{font-size:1.5rem;font-weight:700;color:#2c3e50;}
-        .alert{padding:16px 20px;border-radius:12px;margin:20px 0;font-weight:600;display:flex;align-items:center;gap:12px;}
-        .alert-warning{background:#fff3cd;border:1px solid #ffeaa7;color:#856404;}
-        .alert-danger{background:#f8d7da;border:1px solid #f5c6cb;color:#721c24;}
-        .alert-info{background:#d1ecf1;border:1px solid #bee5eb;color:#0c5460;}
-        .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin:24px 0;}
-        .video-card{background:#f8f9fa;border-radius:16px;overflow:hidden;box-shadow:0 4px 6px -1px rgba(0,0,0,0.1);transition:transform 0.3s ease,box-shadow 0.3s ease;}
-        .video-card:hover{transform:translateY(-4px);box-shadow:0 10px 25px -3px rgba(0,0,0,0.1);}
-        .video-wrapper{position:relative;width:100%;height:0;padding-bottom:56.25%;}
-        .video-wrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
-        .video-info{padding:16px;}
-        .video-title{font-weight:600;color:#2c3e50;margin-bottom:8px;}
-        .video-description{color:#7f8c8d;font-size:0.9rem;}
-        .wifi-section{background:linear-gradient(135deg,#34495e 0%,#2c3e50 100%);color:white;border-radius:16px;padding:32px;margin:24px 0;}
-        .wifi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin:20px 0;}
-        .wifi-card{background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);border-radius:12px;padding:20px;text-align:center;}
-        .wifi-name{font-size:1.2rem;font-weight:700;margin-bottom:8px;}
-        .wifi-details{opacity:0.9;margin-bottom:12px;}
-        .wifi-password{background:rgba(255,255,255,0.15);padding:12px;border-radius:8px;font-family:'Monaco','Menlo',monospace;font-weight:600;margin-top:20px;}
-        .rules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin:24px 0;}
-        .rule-card{background:white;border:1px solid #bdc3c7;border-radius:12px;padding:20px;transition:all 0.3s ease;}
-        .rule-card:hover{transform:translateY(-2px);box-shadow:0 8px 25px -3px rgba(0,0,0,0.15);border-color:#95a5a6;}
-        .rule-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
-        .rule-icon{font-size:1.5rem;}
-        .rule-title{font-weight:600;color:#2c3e50;}
-        .rule-content{color:#34495e;}
-        .schedule-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:20px 0;}
-        .schedule-item{background:linear-gradient(135deg,#3498db 0%,#2980b9 100%);color:white;padding:20px;border-radius:12px;text-align:center;}
-        .schedule-label{font-weight:600;margin-bottom:8px;}
-        .schedule-time{font-size:1.1rem;font-weight:700;}
-        .occupancy-info{background:#ecf0f1;border-radius:12px;padding:20px;margin:20px 0;}
-        .contact-section{background:linear-gradient(135deg,#2c3e50 0%,#34495e 100%);color:white;border-radius:16px;padding:32px;text-align:center;}
-        .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin:24px 0;}
-        .contact-card{background:rgba(255,255,255,0.1);border-radius:12px;padding:20px;backdrop-filter:blur(10px);}
-        .contact-card h4{margin-bottom:12px;font-weight:600;}
-        .contact-card a{color:#ecf0f1;text-decoration:none;font-weight:600;transition:opacity 0.3s ease;}
-        .contact-card a:hover{opacity:0.8;}
-        .checklist{background:#d4edda;border:1px solid #c3e6cb;border-radius:12px;padding:20px;}
-        .checklist-item{display:flex;align-items:center;gap:12px;padding:8px 0;color:#155724;}
-        .checklist-item::before{content:"✓";background:#28a745;color:white;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:bold;}
-        .combined-section{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:40px;align-items:start;}
-        .section-box{background:white;border-radius:12px;padding:0;}
-        .section-box .section-header{margin-bottom:20px;}
-        .floating-buttons{position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:12px;z-index:1000;}
-        .floating-btn{width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.3s ease;display:flex;align-items:center;justify-content:center;text-decoration:none;}
-        .floating-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.2);}
-        .whatsapp-btn{background:#25d366;color:white;}
-        .whatsapp-btn:hover{background:#128c7e;}
-        .scroll-top-btn{background:#34495e;color:white;opacity:0;visibility:hidden;transition:all 0.3s ease;}
-        .scroll-top-btn.visible{opacity:1;visibility:visible;}
-        .vibrate{animation:vibrate 2s infinite;}
-        @keyframes vibrate{0%,100%{transform:translateX(0);}10%,30%,50%,70%,90%{transform:translateX(-2px);}20%,40%,60%,80%{transform:translateX(2px);}}
-        .hidden{display:none !important;}
-        ul{list-style:none;padding:0;}
-        ul li{position:relative;padding-left:20px;margin-bottom:8px;color:#34495e;}
-        ul li::before{content:"•";color:#3498db;font-weight:bold;position:absolute;left:0;}
-
+        
+        /* Lazy loading placeholder */
+        .video-placeholder{
+            width:100%;
+            height:200px;
+            background:#f0f0f0;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border-radius:8px;
+            cursor:pointer;
+            transition:background 0.3s ease;
+        }
+        .video-placeholder:hover{background:#e0e0e0;}
+        .video-placeholder::after{
+            content:"▶ Cargar Video";
+            font-size:1.1rem;
+            color:#666;
+        }
+        
         @media(max-width:768px){
         .hero{padding:30px 20px;}
         .hero h1{font-size:2.2rem;}
         .hero-grid{grid-template-columns:1fr;gap:20px;text-align:center;}
         .hero-text{text-align:center;}
         .section{padding:24px 20px;}
-        .video-grid,.rules-grid{grid-template-columns:1fr;}
-        .wifi-grid,.schedule-grid,.contact-grid{grid-template-columns:1fr;}
-        .combined-section{grid-template-columns:1fr;gap:20px;}
-        .floating-buttons{bottom:16px;right:16px;}
-        .floating-btn{width:48px;height:48px;}
-        }
-
-        @media(max-width:480px){
-        .hero h1{font-size:1.8rem;}
-        .section{padding:20px 16px;}
-        .video-grid{gap:16px;}
-        .floating-btn{width:44px;height:44px;}
         }
     </style>
 </head>
@@ -123,7 +77,8 @@
                     <p data-translate="subtitle">Estas son las reglas para tu Airbnb</p>
                 </div>
                 <div class="hero-image">
-                    <img src="/frontis.webp" alt="Frontis del edificio Alcanfores 957" />
+                    <!-- High priority image with explicit dimensions to prevent CLS -->
+                    <img src="/frontis.webp" alt="Frontis del edificio Alcanfores 957" fetchpriority="high" width="600" height="400" />
                 </div>
             </div>
             
@@ -143,13 +98,13 @@
 
     <!-- Floating Buttons -->
     <div class="floating-buttons">
-        <button class="floating-btn scroll-top-btn" id="scrollToTop" title="Ir al inicio">
+        <button class="floating-btn scroll-top-btn" id="scrollToTop" title="Ir al inicio" aria-label="Volver al inicio">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
             </svg>
         </button>
         
-        <a href="https://wa.me/51970339122" class="floating-btn whatsapp-btn vibrate" title="WhatsApp - Emergencias">
+        <a href="https://wa.me/51970339122" class="floating-btn whatsapp-btn vibrate" title="WhatsApp - Emergencias" aria-label="Contactar por WhatsApp">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.893 3.386"/>
             </svg>
@@ -168,8 +123,8 @@
                 <div class="video-grid">
                     <div class="video-card">
                         <div class="video-wrapper">
-                            <iframe class="video-es" src="https://www.youtube.com/embed/7qMZbH_MPsc?autoplay=1&mute=1&loop=1&playlist=7qMZbH_MPsc&controls=0&modestbranding=1&rel=0&showinfo=0" allowfullscreen></iframe>
-                            <iframe class="video-en hidden" src="https://www.youtube.com/embed/7qMZbH_MPsc?autoplay=1&mute=1&loop=1&playlist=7qMZbH_MPsc&controls=0&modestbranding=1&rel=0&showinfo=0" allowfullscreen></iframe>
+                            <!-- Lazy loaded YouTube iframe with proper title and dimensions -->
+                            <div class="video-placeholder" data-video-es="https://www.youtube.com/embed/7qMZbH_MPsc?autoplay=1&mute=1&loop=1&playlist=7qMZbH_MPsc&controls=0&modestbranding=1&rel=0&showinfo=0" data-video-en="https://www.youtube.com/embed/7qMZbH_MPsc?autoplay=1&mute=1&loop=1&playlist=7qMZbH_MPsc&controls=0&modestbranding=1&rel=0&showinfo=0" data-title-es="Cómo abrir la caja de seguridad del Airbnb" data-title-en="How to open the Airbnb safe box"></div>
                         </div>
                         <div class="video-info">
                             <h3 class="video-title" data-translate="safe-box-title">Cómo abrir la caja de seguridad</h3>
@@ -179,8 +134,7 @@
 
                     <div class="video-card">
                         <div class="video-wrapper">
-                            <iframe class="video-es" src="https://www.youtube.com/embed/NFQsJut8Dgw?controls=0&modestbranding=1&rel=0" allowfullscreen></iframe>
-                            <iframe class="video-en hidden" src="https://www.youtube.com/embed/Rse93vMWeU0?controls=0&modestbranding=1&rel=0" allowfullscreen></iframe>
+                            <div class="video-placeholder" data-video-es="https://www.youtube.com/embed/NFQsJut8Dgw?controls=0&modestbranding=1&rel=0" data-video-en="https://www.youtube.com/embed/Rse93vMWeU0?controls=0&modestbranding=1&rel=0" data-title-es="Tutorial detallado para ingresar al departamento" data-title-en="Detailed tutorial to enter the apartment"></div>
                         </div>
                         <div class="video-info">
                             <h3 class="video-title" data-translate="entry-title">Cómo ingresar al departamento</h3>
@@ -257,8 +211,7 @@
                 <div class="video-grid">
                     <div class="video-card">
                         <div class="video-wrapper">
-                            <iframe class="video-es" src="https://www.youtube.com/embed/IhaZ4NbX0mY?controls=0&modestbranding=1&rel=0" allowfullscreen></iframe>
-                            <iframe class="video-en hidden" src="https://www.youtube.com/embed/8TlMmhSkFoE?controls=0&modestbranding=1&rel=0" allowfullscreen></iframe>
+                            <div class="video-placeholder" data-video-es="https://www.youtube.com/embed/IhaZ4NbX0mY?controls=0&modestbranding=1&rel=0" data-video-en="https://www.youtube.com/embed/8TlMmhSkFoE?controls=0&modestbranding=1&rel=0" data-title-es="Tutorial para ducharse con agua caliente en baño principal" data-title-en="Tutorial for hot water shower in main bathroom"></div>
                         </div>
                         <div class="video-info">
                             <h3 class="video-title" data-translate="shower-main-title">¿Cómo ducharse con agua caliente?</h3>
@@ -268,8 +221,7 @@
 
                     <div class="video-card">
                         <div class="video-wrapper">
-                            <iframe class="video-es" src="https://www.youtube.com/embed/x53JCNqUiC4?controls=0&modestbranding=1&rel=0" allowfullscreen></iframe>
-                            <iframe class="video-en hidden" src="https://www.youtube.com/embed/uA9nS7JYoTI?controls=0&modestbranding=1&rel=0" allowfullscreen></iframe>
+                            <div class="video-placeholder" data-video-es="https://www.youtube.com/embed/x53JCNqUiC4?controls=0&modestbranding=1&rel=0" data-video-en="https://www.youtube.com/embed/uA9nS7JYoTI?controls=0&modestbranding=1&rel=0" data-title-es="Tutorial para agua caliente en dormitorio principal" data-title-en="Tutorial for hot water in master bedroom"></div>
                         </div>
                         <div class="video-info">
                             <h3 class="video-title" data-translate="shower-master-title">¿Y en el Dormitorio Principal?</h3>
@@ -382,7 +334,7 @@
 
                         <div class="video-card">
                             <div class="video-wrapper">
-                                <iframe src="https://www.youtube.com/embed/jYw3l-NhX20?controls=0&modestbranding=1&rel=0" allowfullscreen></iframe>
+                                <div class="video-placeholder" data-video-es="https://www.youtube.com/embed/jYw3l-NhX20?controls=0&modestbranding=1&rel=0" data-video-en="https://www.youtube.com/embed/jYw3l-NhX20?controls=0&modestbranding=1&rel=0" data-title-es="Tutorial para usar la televisión inteligente" data-title-en="Smart TV usage tutorial"></div>
                             </div>
                             <div class="video-info">
                                 <h3 class="video-title" data-translate="tv-title">Cómo usar la TV</h3>
@@ -434,7 +386,7 @@
 
                         <div class="video-card">
                             <div class="video-wrapper">
-                                <iframe src="https://www.youtube.com/embed/GdKKzU4MNEw?controls=0&modestbranding=1&rel=0" allowfullscreen></iframe>
+                                <div class="video-placeholder" data-video-es="https://www.youtube.com/embed/GdKKzU4MNEw?controls=0&modestbranding=1&rel=0" data-video-en="https://www.youtube.com/embed/GdKKzU4MNEw?controls=0&modestbranding=1&rel=0" data-title-es="Cómo reducir el ruido del generador" data-title-en="How to reduce generator noise"></div>
                             </div>
                             <div class="video-info">
                                 <h3 class="video-title" data-translate="noise-title">Cómo mitigar el ruido del generador</h3>
@@ -463,7 +415,97 @@
         </div>
     </div>
 
+    <!-- Load non-critical CSS after content loads -->
+    <style media="print" onload="this.media='all'">
+        .language-switch-container{display:flex;align-items:center;justify-content:center;margin:20px 0;}
+        .language-label{font-weight:bold;margin:0 10px;color:white;font-size:14px;}
+        .language-switch{position:relative;width:60px;height:30px;}
+        .toggle-checkbox{display:none;}
+        .toggle-label{position:relative;display:block;height:100%;background:#e0e0e0;border-radius:15px;cursor:pointer;overflow:hidden;border:0.5px solid rgba(255,255,255,0.3);}
+        .toggle-label:before{content:'';position:absolute;top:2px;left:2px;width:26px;height:26px;border-radius:13px;background:white;transition:0.3s;z-index:2;box-shadow:0 4px 8px rgba(0,0,0,0.3);}
+        .toggle-checkbox:checked + .toggle-label:before{left:calc(100% - 28px);}
+        .toggle-spanish,.toggle-english{position:absolute;top:0;width:50%;height:100%;transition:opacity 0.3s ease;display:flex;align-items:center;justify-content:center;font-size:16px;}
+        .toggle-spanish{right:0;}
+        .toggle-spanish::after{content:"🇺🇸";}
+        .toggle-english{left:0;opacity:0;}
+        .toggle-english::after{content:"🇪🇸";}
+        .toggle-checkbox:checked + .toggle-label .toggle-spanish{opacity:0;}
+        .toggle-checkbox:checked + .toggle-label .toggle-english{opacity:1;}
+        .alert{padding:16px 20px;border-radius:12px;margin:20px 0;font-weight:600;display:flex;align-items:center;gap:12px;}
+        .alert-warning{background:#fff3cd;border:1px solid #ffeaa7;color:#856404;}
+        .alert-danger{background:#f8d7da;border:1px solid #f5c6cb;color:#721c24;}
+        .alert-info{background:#d1ecf1;border:1px solid #bee5eb;color:#0c5460;}
+        .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin:24px 0;}
+        .video-card{background:#f8f9fa;border-radius:16px;overflow:hidden;box-shadow:0 4px 6px -1px rgba(0,0,0,0.1);transition:transform 0.3s ease,box-shadow 0.3s ease;}
+        .video-card:hover{transform:translateY(-4px);box-shadow:0 10px 25px -3px rgba(0,0,0,0.1);}
+        .video-wrapper{position:relative;width:100%;height:0;padding-bottom:56.25%;}
+        .video-wrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
+        .video-info{padding:16px;}
+        .video-title{font-weight:600;color:#2c3e50;margin-bottom:8px;}
+        .video-description{color:#5a6c7d;font-size:0.9rem;}
+        .wifi-section{background:linear-gradient(135deg,#34495e 0%,#2c3e50 100%);color:white;border-radius:16px;padding:32px;margin:24px 0;}
+        .wifi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin:20px 0;}
+        .wifi-card{background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);border-radius:12px;padding:20px;text-align:center;}
+        .wifi-name{font-size:1.2rem;font-weight:700;margin-bottom:8px;}
+        .wifi-details{opacity:0.9;margin-bottom:12px;}
+        .wifi-password{background:rgba(255,255,255,0.15);padding:12px;border-radius:8px;font-family:'Monaco','Menlo',monospace;font-weight:600;margin-top:20px;}
+        .rules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin:24px 0;}
+        .rule-card{background:white;border:1px solid #bdc3c7;border-radius:12px;padding:20px;transition:all 0.3s ease;}
+        .rule-card:hover{transform:translateY(-2px);box-shadow:0 8px 25px -3px rgba(0,0,0,0.15);border-color:#95a5a6;}
+        .rule-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+        .rule-icon{font-size:1.5rem;}
+        .rule-title{font-weight:600;color:#2c3e50;}
+        .rule-content{color:#34495e;}
+        .schedule-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:20px 0;}
+        .schedule-item{background:linear-gradient(135deg,#3498db 0%,#2980b9 100%);color:white;padding:20px;border-radius:12px;text-align:center;}
+        .schedule-label{font-weight:600;margin-bottom:8px;}
+        .schedule-time{font-size:1.1rem;font-weight:700;}
+        .occupancy-info{background:#ecf0f1;border-radius:12px;padding:20px;margin:20px 0;}
+        .contact-section{background:linear-gradient(135deg,#2c3e50 0%,#34495e 100%);color:white;border-radius:16px;padding:32px;text-align:center;}
+        .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin:24px 0;}
+        .contact-card{background:rgba(255,255,255,0.1);border-radius:12px;padding:20px;backdrop-filter:blur(10px);}
+        .contact-card h4{margin-bottom:12px;font-weight:600;}
+        .contact-card a{color:#ecf0f1;text-decoration:none;font-weight:600;transition:opacity 0.3s ease;}
+        .contact-card a:hover{opacity:0.8;}
+        .checklist{background:#d4edda;border:1px solid #c3e6cb;border-radius:12px;padding:20px;}
+        .checklist-item{display:flex;align-items:center;gap:12px;padding:8px 0;color:#155724;}
+        .checklist-item::before{content:"✓";background:#28a745;color:white;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:bold;}
+        .combined-section{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:30px;align-items:start;}
+        .section-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+        .section-box .section-header{margin-bottom:20px;}
+        .floating-buttons{position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:12px;z-index:1000;}
+        .floating-btn{width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.3s ease;display:flex;align-items:center;justify-content:center;text-decoration:none;}
+        .floating-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.2);}
+        .whatsapp-btn{background:#25d366;color:white;}
+        .whatsapp-btn:hover{background:#128c7e;}
+        .scroll-top-btn{background:#34495e;color:white;opacity:0;visibility:hidden;transition:all 0.3s ease;}
+        .scroll-top-btn.visible{opacity:1;visibility:visible;}
+        .vibrate{animation:vibrate 2s infinite;}
+        @keyframes vibrate{0%,100%{transform:translateX(0);}10%,30%,50%,70%,90%{transform:translateX(-2px);}20%,40%,60%,80%{transform:translateX(2px);}}
+        .hidden{display:none !important;}
+        ul{list-style:none;padding:0;}
+        ul li{position:relative;padding-left:20px;margin-bottom:8px;color:#34495e;}
+        ul li::before{content:"•";color:#3498db;font-weight:bold;position:absolute;left:0;}
+        
+        @media(max-width:768px){
+            .combined-section{grid-template-columns:1fr;gap:20px;}
+            .section-box{padding:16px;}
+            .floating-buttons{bottom:16px;right:16px;}
+            .floating-btn{width:48px;height:48px;}
+        }
+        
+        @media(max-width:480px){
+            .video-grid{gap:16px;}
+            .wifi-grid,.schedule-grid,.contact-grid{grid-template-columns:1fr;}
+            .rules-grid{grid-template-columns:1fr;}
+            .combined-section{gap:16px;}
+            .floating-btn{width:44px;height:44px;}
+        }
+    </style>
+    
+    <!-- JavaScript moved to bottom and optimized -->
     <script>
+        // Critical JavaScript for interactivity
         const translations = {
             es: {
                 'welcome': '¡Bienvenidos!',
@@ -599,7 +641,37 @@
 
         let currentLang = 'es';
 
-        // Esperar a que el DOM esté cargado
+        // Optimized lazy video loading
+        function loadVideo(placeholder) {
+            const videoUrl = currentLang === 'es' ? placeholder.dataset.videoEs : placeholder.dataset.videoEn;
+            const title = currentLang === 'es' ? placeholder.dataset.titleEs : placeholder.dataset.titleEn;
+            
+            const iframe = document.createElement('iframe');
+            iframe.src = videoUrl;
+            iframe.width = '100%';
+            iframe.height = '100%';
+            iframe.style.border = 'none';
+            iframe.style.position = 'absolute';
+            iframe.style.top = '0';
+            iframe.style.left = '0';
+            iframe.title = title;
+            iframe.loading = 'lazy';
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+            iframe.allowFullscreen = true;
+            
+            // Replace placeholder with iframe
+            placeholder.parentNode.replaceChild(iframe, placeholder);
+        }
+
+        // Event delegation for performance
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('video-placeholder') || e.target.closest('.video-placeholder')) {
+                const placeholder = e.target.classList.contains('video-placeholder') ? e.target : e.target.closest('.video-placeholder');
+                loadVideo(placeholder);
+            }
+        });
+
+        // DOM loaded event handler
         document.addEventListener('DOMContentLoaded', function() {
             const languageToggle = document.getElementById('language-toggle');
             const scrollToTopBtn = document.getElementById('scrollToTop');
@@ -608,27 +680,52 @@
                 languageToggle.addEventListener('change', function() {
                     currentLang = currentLang === 'es' ? 'en' : 'es';
                     translatePage();
-                    toggleVideos();
                 });
             }
 
-            // Scroll to top functionality
-            if (scrollToTopBtn) {
-                // Show/hide button based on scroll position
-                window.addEventListener('scroll', function() {
-                    if (window.pageYOffset > 300) {
-                        scrollToTopBtn.classList.add('visible');
-                    } else {
-                        scrollToTopBtn.classList.remove('visible');
-                    }
-                });
+            // Optimized scroll handler with throttling
+            let ticking = false;
+            function updateScrollButton() {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('visible');
+                } else {
+                    scrollToTopBtn.classList.remove('visible');
+                }
+                ticking = false;
+            }
 
-                // Scroll to top when clicked
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    requestAnimationFrame(updateScrollButton);
+                    ticking = true;
+                }
+            });
+
+            if (scrollToTopBtn) {
                 scrollToTopBtn.addEventListener('click', function() {
                     window.scrollTo({
                         top: 0,
                         behavior: 'smooth'
                     });
+                });
+            }
+
+            // Intersection Observer for lazy loading videos when they come into view
+            if ('IntersectionObserver' in window) {
+                const videoObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const placeholder = entry.target;
+                            // Auto-load videos when they're 50% visible
+                            setTimeout(() => loadVideo(placeholder), 500);
+                            videoObserver.unobserve(placeholder);
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                // Observe all video placeholders
+                document.querySelectorAll('.video-placeholder').forEach(placeholder => {
+                    videoObserver.observe(placeholder);
                 });
             }
         });
@@ -644,20 +741,7 @@
             document.documentElement.lang = currentLang;
         }
 
-        function toggleVideos() {
-            const esVideos = document.querySelectorAll('.video-es');
-            const enVideos = document.querySelectorAll('.video-en');
-            
-            if (currentLang === 'en') {
-                esVideos.forEach(video => video.classList.add('hidden'));
-                enVideos.forEach(video => video.classList.remove('hidden'));
-            } else {
-                esVideos.forEach(video => video.classList.remove('hidden'));
-                enVideos.forEach(video => video.classList.add('hidden'));
-            }
-        }
-
-        // Smooth scrolling for better UX
+        // Smooth scrolling enhancement
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
