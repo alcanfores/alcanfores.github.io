@@ -3,171 +3,672 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AirBnb - Alcanfores</title>
-    <link rel="stylesheet" href="custom.css">
+    <title>Airbnb - Alcanfores Rules</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#2c3e50;background:#f8f9fa;}
+        .hero{background:linear-gradient(135deg,#34495e 0%,#2c3e50 100%);color:white;text-align:center;padding:40px 20px;position:relative;overflow:hidden;}
+        .hero-content{position:relative;z-index:1;max-width:1200px;margin:0 auto;}
+        .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-bottom:30px;}
+        .hero-text{text-align:left;}
+        .hero-image{text-align:center;}
+        .hero-image img{max-width:100%;height:auto;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.3);}
+        .hero h1{font-size:3rem;font-weight:800;margin-bottom:16px;text-shadow:0 2px 4px rgba(0,0,0,0.3);}
+        .hero p{font-size:1.2rem;opacity:0.9;margin-bottom:0;}
+        .language-switch-container{display:flex;align-items:center;justify-content:center;margin:20px 0;}
+        .language-label{font-weight:bold;margin:0 10px;color:white;font-size:14px;}
+        .language-switch{position:relative;width:60px;height:30px;}
+        .toggle-checkbox{display:none;}
+        .toggle-label{position:relative;display:block;height:100%;background:#e0e0e0;border-radius:15px;cursor:pointer;overflow:hidden;border:0.5px solid rgba(255,255,255,0.3);}
+        .toggle-label:before{content:'';position:absolute;top:2px;left:2px;width:26px;height:26px;border-radius:13px;background:white;transition:0.3s;z-index:2;}
+        .toggle-checkbox:checked + .toggle-label:before{left:calc(100% - 28px);}
+        .toggle-spanish,.toggle-english{position:absolute;top:0;width:50%;height:100%;transition:opacity 0.3s ease;display:flex;align-items:center;justify-content:center;font-size:16px;}
+        .toggle-spanish{right:0;}
+        .toggle-spanish::after{content:"🇺🇸";}
+        .toggle-english{left:0;opacity:0;}
+        .toggle-english::after{content:"🇪🇸";}
+        .toggle-checkbox:checked + .toggle-label .toggle-spanish{opacity:0;}
+        .toggle-checkbox:checked + .toggle-label .toggle-english{opacity:1;}
+        .container{max-width:1200px;margin:0 auto;padding:0 20px;}
+        .content{background:white;margin:-40px auto 0;border-radius:20px 20px 0 0;position:relative;z-index:2;box-shadow:0 -10px 40px rgba(0,0,0,0.1);}
+        .section{padding:40px;border-bottom:1px solid #ecf0f1;}
+        .section:last-child{border-bottom:none;border-radius:0 0 20px 20px;}
+        .section-header{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
+        .section-icon{font-size:2rem;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.1));}
+        .section-title{font-size:1.5rem;font-weight:700;color:#2c3e50;}
+        .alert{padding:16px 20px;border-radius:12px;margin:20px 0;font-weight:600;display:flex;align-items:center;gap:12px;}
+        .alert-warning{background:#fff3cd;border:1px solid #ffeaa7;color:#856404;}
+        .alert-danger{background:#f8d7da;border:1px solid #f5c6cb;color:#721c24;}
+        .alert-info{background:#d1ecf1;border:1px solid #bee5eb;color:#0c5460;}
+        .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin:24px 0;}
+        .video-card{background:#f8f9fa;border-radius:16px;overflow:hidden;box-shadow:0 4px 6px -1px rgba(0,0,0,0.1);transition:transform 0.3s ease,box-shadow 0.3s ease;}
+        .video-card:hover{transform:translateY(-4px);box-shadow:0 10px 25px -3px rgba(0,0,0,0.1);}
+        .video-wrapper{position:relative;width:100%;height:0;padding-bottom:56.25%;}
+        .video-wrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
+        .video-info{padding:16px;}
+        .video-title{font-weight:600;color:#2c3e50;margin-bottom:8px;}
+        .video-description{color:#7f8c8d;font-size:0.9rem;}
+        .wifi-section{background:linear-gradient(135deg,#34495e 0%,#2c3e50 100%);color:white;border-radius:16px;padding:32px;margin:24px 0;}
+        .wifi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin:20px 0;}
+        .wifi-card{background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);border-radius:12px;padding:20px;text-align:center;}
+        .wifi-name{font-size:1.2rem;font-weight:700;margin-bottom:8px;}
+        .wifi-details{opacity:0.9;margin-bottom:12px;}
+        .wifi-password{background:rgba(255,255,255,0.15);padding:12px;border-radius:8px;font-family:'Monaco','Menlo',monospace;font-weight:600;margin-top:20px;}
+        .rules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin:24px 0;}
+        .rule-card{background:white;border:1px solid #bdc3c7;border-radius:12px;padding:20px;transition:all 0.3s ease;}
+        .rule-card:hover{transform:translateY(-2px);box-shadow:0 8px 25px -3px rgba(0,0,0,0.15);border-color:#95a5a6;}
+        .rule-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+        .rule-icon{font-size:1.5rem;}
+        .rule-title{font-weight:600;color:#2c3e50;}
+        .rule-content{color:#34495e;}
+        .schedule-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:20px 0;}
+        .schedule-item{background:linear-gradient(135deg,#3498db 0%,#2980b9 100%);color:white;padding:20px;border-radius:12px;text-align:center;}
+        .schedule-label{font-weight:600;margin-bottom:8px;}
+        .schedule-time{font-size:1.1rem;font-weight:700;}
+        .occupancy-info{background:#ecf0f1;border-radius:12px;padding:20px;margin:20px 0;}
+        .contact-section{background:linear-gradient(135deg,#2c3e50 0%,#34495e 100%);color:white;border-radius:16px;padding:32px;text-align:center;}
+        .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin:24px 0;}
+        .contact-card{background:rgba(255,255,255,0.1);border-radius:12px;padding:20px;backdrop-filter:blur(10px);}
+        .contact-card h4{margin-bottom:12px;font-weight:600;}
+        .contact-card a{color:#ecf0f1;text-decoration:none;font-weight:600;transition:opacity 0.3s ease;}
+        .contact-card a:hover{opacity:0.8;}
+        .checklist{background:#d4edda;border:1px solid #c3e6cb;border-radius:12px;padding:20px;}
+        .checklist-item{display:flex;align-items:center;gap:12px;padding:8px 0;color:#155724;}
+        .checklist-item::before{content:"✓";background:#28a745;color:white;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:bold;}
+        .combined-section{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:40px;align-items:start;}
+        .section-box{background:white;border-radius:12px;padding:0;}
+        .section-box .section-header{margin-bottom:20px;}
+        .floating-buttons{position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:12px;z-index:1000;}
+        .floating-btn{width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.3s ease;display:flex;align-items:center;justify-content:center;text-decoration:none;}
+        .floating-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.2);}
+        .whatsapp-btn{background:#25d366;color:white;}
+        .whatsapp-btn:hover{background:#128c7e;}
+        .scroll-top-btn{background:#34495e;color:white;opacity:0;visibility:hidden;transition:all 0.3s ease;}
+        .scroll-top-btn.visible{opacity:1;visibility:visible;}
+        .vibrate{animation:vibrate 2s infinite;}
+        @keyframes vibrate{0%,100%{transform:translateX(0);}10%,30%,50%,70%,90%{transform:translateX(-2px);}20%,40%,60%,80%{transform:translateX(2px);}}
+        .hidden{display:none !important;}
+        ul{list-style:none;padding:0;}
+        ul li{position:relative;padding-left:20px;margin-bottom:8px;color:#34495e;}
+        ul li::before{content:"•";color:#3498db;font-weight:bold;position:absolute;left:0;}
+
+        @media(max-width:768px){
+        .hero{padding:30px 20px;}
+        .hero h1{font-size:2.2rem;}
+        .hero-grid{grid-template-columns:1fr;gap:20px;text-align:center;}
+        .hero-text{text-align:center;}
+        .section{padding:24px 20px;}
+        .video-grid,.rules-grid{grid-template-columns:1fr;}
+        .wifi-grid,.schedule-grid,.contact-grid{grid-template-columns:1fr;}
+        .combined-section{grid-template-columns:1fr;gap:20px;}
+        .floating-buttons{bottom:16px;right:16px;}
+        .floating-btn{width:48px;height:48px;}
+        }
+
+        @media(max-width:480px){
+        .hero h1{font-size:1.8rem;}
+        .section{padding:20px 16px;}
+        .video-grid{gap:16px;}
+        .floating-btn{width:44px;height:44px;}
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1 data-translate="welcome">Bienvenidos!</h1>
-        <h2 data-translate="rules">Estas son las <span>reglas</span> para tu <span>Airbnb</span></h2>
-        <!-- Reemplaza el botón existente con este código -->
-        <div class="language-switch-container">
-            <span class="language-label">Español</span>
-            <div class="language-switch">
-                <input type="checkbox" id="language-toggle" class="toggle-checkbox">
-                <label for="language-toggle" class="toggle-label">
-                    <span class="toggle-spanish"></span>
-                    <span class="toggle-english"></span>
-                </label>
+    <div class="hero">
+        <div class="hero-content">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <h1 data-translate="welcome">¡Bienvenidos!</h1>
+                    <p data-translate="subtitle">Estas son las reglas para tu Airbnb</p>
+                </div>
+                <div class="hero-image">
+                    <img src="/frontis.webp" alt="Frontis del edificio Alcanfores 957" />
+                </div>
             </div>
-            <span class="language-label">English</span>
-        </div>
-    </header>
-
-    <main>
-
-        <section class="videos-section">
-            <h2 data-translate="mandatoryVideos">Es obligatorio ver estos videos (1 min c/u) ANTES de llegar al departamento</h2>
-            <h2 data-translate="thermaWarning">⚠️Por favor no usar la Potencia 8 (P8) en las thermas⚠️</h2>
-            <p data-translate="desc-thermaWarning">De hacerlo, se puede ir la luz en el departamento por la gran cantidad de electricidad que consume</p>
             
-            <div class="videos-container">
-                <div class="video-item">
-                    <h3 data-translate="howToEnter">Cómo ingresar al departamento⚠️</h3>
-                    <iframe src="https://www.youtube.com/embed/NFQsJut8Dgw" frameborder="0" allowfullscreen class="video-es"></iframe>
-                    <iframe src="https://www.youtube.com/embed/Rse93vMWeU0" frameborder="0" allowfullscreen class="video-en" style="display: none;"></iframe>
-                    <a href="https://youtube.com/shorts/NFQsJut8Dgw?si=SvqwjE9OCs4OlatA" target="_blank" class="youtube-btn youtube-btn-es" data-translate="openYoutube">Abrir en Youtube</a>
-                    <a href="https://youtube.com/shorts/Rse93vMWeU0?si=GDcBfmgkewbjqXh1" target="_blank" class="youtube-btn youtube-btn-en" style="display: none;" data-translate="openYoutube">Open on Youtube</a>
+            <div class="language-switch-container">
+                <span class="language-label">Español</span>
+                <div class="language-switch">
+                    <input type="checkbox" id="language-toggle" class="toggle-checkbox">
+                    <label for="language-toggle" class="toggle-label">
+                        <span class="toggle-spanish"></span>
+                        <span class="toggle-english"></span>
+                    </label>
                 </div>
-                <div class="video-item">
-                    <h3 data-translate="howToShower">¿Cómo ducharse con agua caliente?</h3>
-                    <iframe src="https://www.youtube.com/embed/IhaZ4NbX0mY" frameborder="0" allowfullscreen class="video-es"></iframe>
-                    <iframe src="https://www.youtube.com/embed/8TlMmhSkFoE" frameborder="0" allowfullscreen class="video-en" style="display: none;"></iframe>
-                    <a href="https://youtube.com/shorts/IhaZ4NbX0mY?si=knwUb-8ok9waXU7M" target="_blank" class="youtube-btn youtube-btn-es" data-translate="openYoutube">Abrir en Youtube</a>
-                    <a href="https://youtube.com/shorts/8TlMmhSkFoE?si=7yNIvbY52bK74WY2" target="_blank" class="youtube-btn youtube-btn-en" style="display: none;" data-translate="openYoutube">Open on Youtube</a>
+                <span class="language-label">English</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Buttons -->
+    <div class="floating-buttons">
+        <button class="floating-btn scroll-top-btn" id="scrollToTop" title="Ir al inicio">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+            </svg>
+        </button>
+        
+        <a href="https://wa.me/51970339122" class="floating-btn whatsapp-btn vibrate" title="WhatsApp - Emergencias">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.893 3.386"/>
+            </svg>
+        </a>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <!-- Essential Information -->
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-icon">🔑</span>
+                    <h2 class="section-title" data-translate="essential-info">INFORMACIÓN <span style="color: #e74c3c;">OBLIGATORIA</span> ESENCIAL DE LLEGADA</h2>
                 </div>
-                <div class="video-item">
-                    <h3 data-translate="howToShowerMaster">¿Y en el Dormitorio Principal?</h3>
-                    <iframe src="https://www.youtube.com/embed/x53JCNqUiC4" frameborder="0" allowfullscreen class="video-es"></iframe>
-                    <iframe src="https://www.youtube.com/embed/uA9nS7JYoTI" frameborder="0" allowfullscreen class="video-en" style="display: none;"></iframe>
-                    <a href="https://youtube.com/shorts/x53JCNqUiC4?si=6DnQ_gSNGGm11h-o" target="_blank" class="youtube-btn youtube-btn-es" data-translate="openYoutube">Abrir en Youtube</a>
-                    <a href="https://youtube.com/shorts/uA9nS7JYoTI?si=G_XtOHvLyej4MJNd" target="_blank" class="youtube-btn youtube-btn-en" style="display: none;" data-translate="openYoutube">Open on Youtube</a>
+
+                <div class="video-grid">
+                    <div class="video-card">
+                        <div class="video-wrapper">
+                            <iframe class="video-es" src="https://www.youtube.com/embed/7qMZbH_MPsc?autoplay=1&mute=1&loop=1&playlist=7qMZbH_MPsc&controls=0&modestbranding=1&rel=0&showinfo=0" allowfullscreen></iframe>
+                            <iframe class="video-en hidden" src="https://www.youtube.com/embed/7qMZbH_MPsc?autoplay=1&mute=1&loop=1&playlist=7qMZbH_MPsc&controls=0&modestbranding=1&rel=0&showinfo=0" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title" data-translate="safe-box-title">Cómo abrir la caja de seguridad</h3>
+                            <p class="video-description" data-translate="safe-box-desc">Video sin audio con los pasos básicos (7 segundos - Loop infinito)</p>
+                        </div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="video-wrapper">
+                            <iframe class="video-es" src="https://www.youtube.com/embed/NFQsJut8Dgw?controls=0&modestbranding=1&rel=0" allowfullscreen></iframe>
+                            <iframe class="video-en hidden" src="https://www.youtube.com/embed/Rse93vMWeU0?controls=0&modestbranding=1&rel=0" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title" data-translate="entry-title">Cómo ingresar al departamento</h3>
+                            <p class="video-description" data-translate="entry-desc">Tutorial detallado paso a paso (1 minuto)</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>
 
+                <div class="schedule-grid">
+                    <div class="schedule-item">
+                        <div class="schedule-label">Check-In</div>
+                        <div class="schedule-time" data-translate="checkin-time">A partir de las 3:00 PM</div>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-label">Check-Out</div>
+                        <div class="schedule-time" data-translate="checkout-time">10:00 AM último día</div>
+                    </div>
+                </div>
 
-        <section class="wifi">
-            <div class="cont-wifi">
-            <img src="icono_wifi.png" class="iconowifi" alt="Icono de Wifi">
-            <img src="datos_wifi.png" class="datoswifi" alt="Datos del Wifi" id="wifiDataEs">
-            <img src="datos_wifi_en.png" class="datoswifi" alt="WiFi Data" id="wifiDataEn" style="display: none;">
-            </div>
-        </section>
-        <section class="reglas">
-            <h2 data-translate="rememberSchedules">1. Recordemos tus horarios</h2>
-            <ul>
-                <li>
-                    <strong>Check-In:</strong> <span data-translate="checkInTime">Puedes llegar al departamento a partir de las <strong>3pm</strong></span>
-                </li>
-                <li>
-                    <strong>Check-Out:</strong> <span data-translate="checkOutTime">La hora de salida del departamento es el <strong>último día que reservaste hasta las 10 am</strong></span>
-                </li>
-            </ul>
-            <p data-translate="videoInstructions">Te enviaré un video con instrucciones para encontrar la llave del departamento, es <strong>OBLIGATORIO</strong> verlo, si no te lo mandé, házmelo saber</p>
-            <p data-translate="noWaitingTime">No habrá tolerancias de espera, ya que requerimos de tiempo para limpiarlo para el siguiente huésped.</p>
+                <div class="occupancy-info">
+                    <h4 data-translate="max-people">Máximo 4 personas permitidas:</h4>
+                    <ul>
+                        <li data-translate="main-bed">2 personas en cama matrimonial (dormitorio principal)</li>
+                        <li data-translate="bunk-bed">2 personas en cama nido (una arriba, otra abajo)</li>
+                    </ul>
+                </div>
 
-            <h2 data-translate="maxOccupants">2. Respetar el número máximo de ocupantes permitidos en la propiedad</h2>
-            <p><strong class="importante" data-translate="maxPeople">Máximo 4 personas</strong></p>
-            <ul>
-                <li data-translate="bedroomOccupancy">2 personas en la cama matrimonial (2 plazas) del cuarto principal.</li>
-                <li data-translate="bunkBedOccupancy">En la cama tipo nido o cama con cama auxiliar (2 camas, una arriba de la otra, de 1.5 plazas cada una), 1 persona arriba, otra abajo.</li>
-            </ul>
+                <div class="alert alert-warning">
+                    <span>ℹ️</span>
+                    <span data-translate="no-tolerance">IMPORTANTE: No habrá tolerancias de espera, necesitamos tiempo para preparar el departamento para el siguiente huésped.</span>
+                </div>
+            </section>
 
-            <h2 data-translate="harmonyRules">3. Convivamos en Armonía</h2>
-        </section>
-        <section class="instrucciones grid-container">
-            <div class="grid-item">
-                <h2 data-translate="noParties">No están permitidas las fiestas</h2>
-                <img src="icono_fiesta.png" alt="Icono fiesta">
-                <p data-translate="respectNeighbors">Respeta a tus vecinos. En Miraflores hay un límite de decibeles, si se supera, aplican sanciones municipales.</p>
-            </div>
+            <!-- WiFi Section -->
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-icon">📶</span>
+                    <h2 class="section-title" data-translate="wifi-title">CREDENCIALES WIFI</h2>
+                </div>
 
-            <div class="grid-item">
-                <h2 data-translate="silentHours">Respetemos el horario de silencio</h2>
-                <img src="icono_reloj.png" alt="Icono reloj">
-                <p data-translate="silentHoursTime">Haz silencio a partir de las <strong>10pm</strong> hasta las <strong>7am</strong></p>
-            </div>
+                <div class="wifi-section">
+                    <div class="wifi-grid">
+                        <div class="wifi-card">
+                            <div class="wifi-name">AIRBNB - 1</div>
+                            <div class="wifi-details" data-translate="wifi-24">Red 2.4GHz • Mayor alcance • Menos velocidad</div>
+                        </div>
+                        <div class="wifi-card">
+                            <div class="wifi-name">AIRBNB- AC</div>
+                            <div class="wifi-details" data-translate="wifi-5">Red 5GHz • Menos alcance • Más velocidad</div>
+                        </div>
+                    </div>
+                    <div class="wifi-password">
+                        <strong data-translate="password">Contraseña para ambas:</strong> Bienvenidos123<br>
+                        <small data-translate="password-note">(Con B mayúscula)</small>
+                    </div>
+                </div>
+            </section>
 
-            <div class="grid-item">
-                <h2 data-translate="hotWaterInstructions">Revisa los videos de cómo bañarse con agua caliente</h2>
-                <img src="icono_terma.png" alt="Icono terma">
-                <ul>
-                    <li data-translate="dontUseRefrigeratorTherma"><strong>NO</strong> uses la therma ubicada al lado del refrigerador.</li>
-                    <li data-translate="useProperTherma">Asegúrate de utilizar las ubicadas en cada baño, siguiendo el tutorial que te pasé. De no tenerlo, pídemelo.</li>
-                    <li data-translate="dontUseP8"><strong class="importante">NO UTILICES LA POTENCIA 8 (P8)</strong>, ya que se puede ir la luz en el departamento.</li>
-                </ul>
-            </div>
+            <!-- Hot Water Section -->
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-icon">🚿</span>
+                    <h2 class="section-title" data-translate="hot-water-title">TUTORIALES DE AGUA CALIENTE</h2>
+                </div>
 
-            <div class="grid-item">
-                <h2 data-translate="useDesignatedContainers">Utiliza los contenedores designados</h2>
-                <img src="icono_tacho.png" alt="Icono Tacho">
-                <ul>
-                    <li data-translate="findRedDoor">Ve al sótano, identifica <span class="puerta_roja">una puerta de color rojo</span>, ábrela, encontrarás un contenedor de basura común del edificio.</li>
-                    <li data-translate="reachRedDoor">Para llegar puedes presionar (L) en el ascensor, saliendo, a la izquierda estará la puerta roja.</li>
-                </ul>
-            </div>
+                <div class="alert alert-danger">
+                    <span>🚫</span>
+                    <div>
+                        <strong data-translate="p8-warning">NO USAR POTENCIA 8 (P8) EN LAS THERMAS</strong><br>
+                        <span data-translate="p8-consequence">De hacerlo, se puede ir la luz en todo el departamento por el alto consumo eléctrico</span>
+                    </div>
+                </div>
 
-            <div class="grid-item">
-                <h2 data-translate="keepClean">Manten tu espacio limpio y ordenado</h2>
-                <img src="icono_limpieza.png" alt="Icono de artículos de limpieza">
-                <ul>
-                    <li data-translate="cleaningSupplies">Tienes instrumentos de limpieza debajo del lavabo de la cocina</li>
-                    <li data-translate="clothesHanger">Si necesitas tender ropa o toallas, hay un tendal plegable frente al refrigerador</li>
-                    <li data-translate="noDryingOnWindow">Está prohibido poner a secar en la ventana del dpto.</li>
-                    <li data-translate="TowelsHand">Está prohibido usar las toallas de manos para los pies. Esto puede incurrir en costo por reposición.</li>
-                </ul>
-            </div>
+                <div class="video-grid">
+                    <div class="video-card">
+                        <div class="video-wrapper">
+                            <iframe class="video-es" src="https://www.youtube.com/embed/IhaZ4NbX0mY?controls=0&modestbranding=1&rel=0" allowfullscreen></iframe>
+                            <iframe class="video-en hidden" src="https://www.youtube.com/embed/8TlMmhSkFoE?controls=0&modestbranding=1&rel=0" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title" data-translate="shower-main-title">¿Cómo ducharse con agua caliente?</h3>
+                            <p class="video-description" data-translate="shower-main-desc">Tutorial para el baño principal (1 minuto)</p>
+                        </div>
+                    </div>
 
-            <div class="grid-item">
-                <h2 data-translate="noSmoking">No está permitido Fumar</h2>
-                <img src="icono_nofumar.png" alt="Icono de NO Fumar">
-                <p data-translate="smokeAlarms">El fumar o vapear será detectado por las alarmas de humo. Dentro y fuera del edificio.</p>
-            </div>
+                    <div class="video-card">
+                        <div class="video-wrapper">
+                            <iframe class="video-es" src="https://www.youtube.com/embed/x53JCNqUiC4?controls=0&modestbranding=1&rel=0" allowfullscreen></iframe>
+                            <iframe class="video-en hidden" src="https://www.youtube.com/embed/uA9nS7JYoTI?controls=0&modestbranding=1&rel=0" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title" data-translate="shower-master-title">¿Y en el Dormitorio Principal?</h3>
+                            <p class="video-description" data-translate="shower-master-desc">Tutorial para el baño del dormitorio principal (1 minuto)</p>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="grid-item">
-                <h2 data-translate="noPets">No están permitidas las mascotas</h2>
-                <img src="icono_mascota.png" alt="Icono Mascotas">
-                <p data-translate="petsNotAllowed">Amamos a las mascotas, pero nuestro piso no está preparado para recibirlas :(</p>
-            </div>
+                <div class="alert alert-info">
+                    <span>💡</span>
+                    <div>
+                        <strong data-translate="important-rules">Reglas importantes:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li data-translate="no-fridge-therma">NO uses la therma ubicada al lado del refrigerador</li>
+                            <li data-translate="use-bathroom-therma">Usa solo las thermas ubicadas en cada baño</li>
+                            <li data-translate="never-p8">NUNCA uses Potencia 8 (P8)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
 
-            <div class="grid-item">
-                <h2 data-translate="reportIssues">Avísanos inmediatamente si pasa algo</h2>
-                <img src="icono_roto.png" alt="Icono Incertidumbre">
-                <p data-translate="cantFixForNext">Sino, no seremos capaces de arreglarlo para el siguiente huésped.</p>
-                <p data-translate="additionalCharges">Esto puede incurrir en cargos adicionales de ser necesario.</p>
-            </div>
+            <!-- Rules Section -->
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-icon">🏠</span>
+                    <h2 class="section-title" data-translate="rules-title">REGLAS DE CONVIVENCIA</h2>
+                </div>
 
-            <div class="grid-item">
-                <h2 data-translate="secureDoors">Cerrar y asegurar todas las puertas y ventanas al salir de la propiedad</h2>
-                <img src="icono_llave.png" alt="Icono Llave">
-                <p data-translate="leaveKey">Al dejar el departamento deja la llave en donde la encontraste</p>
-            </div>
-        </section>
+                <div class="rules-grid">
+                    <div class="rule-card">
+                        <div class="rule-header">
+                            <span class="rule-icon">🔇</span>
+                            <h3 class="rule-title" data-translate="silent-hours">Horarios de Silencio</h3>
+                        </div>
+                        <div class="rule-content">
+                            <strong>10:00 PM - 7:00 AM</strong><br>
+                            <span data-translate="respect-neighbors">Respeta a los vecinos. En Miraflores hay límites de decibeles con sanciones municipales.</span>
+                        </div>
+                    </div>
 
-        <section class="contacto">
-            <h2 data-translate="needAnything">Si necesitas algo, dímelo.</h2>
-            <img src="frontis.png" alt="Frontis del edificio">
-            <h3 data-translate="stayingHere">AQUÍ TE ESTÁS QUEDANDO</h3>
-            <p data-translate="address">Calle Alcanfores 957 Dpto 202 - Miraflores, Lima, Perú.</p>
-            <h3 data-translate="needHelp">¿Necesitas ayuda?</h3>
-            <p data-translate="openAirbnbApp">ABRE TU APP DE AIRBNB</p>
-            <p data-translate="attendingMessage">Estaré atento a tu mensaje.</p>
-            <h3 data-translate="emergency">¿Una emergencia?</h3>
-            <p data-translate="whatsapp">WHATSAPP</p>
-            <a href="https://wa.me/51970339122" target="_blank" data-translate="phoneNumber">+51 970 339 122</a>    
-        </section>
-    </main>
-    <script src="alcanfores.js"></script>
+                    <div class="rule-card">
+                        <div class="rule-header">
+                            <span class="rule-icon">🗑️</span>
+                            <h3 class="rule-title" data-translate="trash-title">Manejo de Basura</h3>
+                        </div>
+                        <div class="rule-content">
+                            <ul>
+                                <li data-translate="trash-step1">Ve al sótano (presiona "L" en el ascensor)</li>
+                                <li data-translate="trash-step2">Al salir, busca la puerta roja a la izquierda</li>
+                                <li data-translate="trash-step3">Deposita la basura en el contenedor del edificio</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-header">
+                            <span class="rule-icon">🚭</span>
+                            <h3 class="rule-title" data-translate="no-smoking">Prohibido Fumar/Vapear</h3>
+                        </div>
+                        <div class="rule-content">
+                            <span data-translate="smoke-detection">Las alarmas de humo detectan cualquier tipo de humo dentro y fuera del edificio.</span>
+                        </div>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-header">
+                            <span class="rule-icon">🧹</span>
+                            <h3 class="rule-title" data-translate="cleaning-title">Limpieza y Orden</h3>
+                        </div>
+                        <div class="rule-content">
+                            <ul>
+                                <li data-translate="cleaning-supplies">Instrumentos de limpieza: debajo del lavabo de la cocina</li>
+                                <li data-translate="clothesline">Tendedero plegable: frente al refrigerador</li>
+                                <li data-translate="no-window-drying">Prohibido: secar ropa en ventanas</li>
+                                <li data-translate="towel-rule">Prohibido: usar toallas de manos para los pies (costo de reposición)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-header">
+                            <span class="rule-icon">🎉</span>
+                            <h3 class="rule-title" data-translate="no-parties">No Fiestas</h3>
+                        </div>
+                        <div class="rule-content">
+                            <span data-translate="no-loud-gatherings">Las reuniones ruidosas no están permitidas en ningún momento.</span>
+                        </div>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-header">
+                            <span class="rule-icon">🐕</span>
+                            <h3 class="rule-title" data-translate="no-pets">No Mascotas</h3>
+                        </div>
+                        <div class="rule-content">
+                            <span data-translate="pets-explanation">Amamos a las mascotas, pero nuestro espacio no está preparado para recibirlas.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Entertainment + Checkout Combined Section -->
+            <section class="section">
+                <div class="combined-section">
+                    <div class="section-box">
+                        <div class="section-header">
+                            <span class="section-icon">📺</span>
+                            <h2 class="section-title" data-translate="entertainment-title">ENTRETENIMIENTO</h2>
+                        </div>
+
+                        <div class="video-card">
+                            <div class="video-wrapper">
+                                <iframe src="https://www.youtube.com/embed/jYw3l-NhX20?controls=0&modestbranding=1&rel=0" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-info">
+                                <h3 class="video-title" data-translate="tv-title">Cómo usar la TV</h3>
+                                <p class="video-description" data-translate="tv-desc">En nuestros smart TVs podrás configurar tus cuentas favoritas: Netflix, Prime Video, etc.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-box">
+                        <div class="section-header">
+                            <span class="section-icon">🔒</span>
+                            <h2 class="section-title" data-translate="checkout-title">AL SALIR</h2>
+                        </div>
+
+                        <div class="checklist">
+                            <div class="checklist-item">
+                                <span data-translate="close-doors">Cierra todas las puertas y ventanas</span>
+                            </div>
+                            <div class="checklist-item">
+                                <span data-translate="leave-key">Deja la llave en la caja de seguridad donde la encontraste</span>
+                            </div>
+                            <div class="checklist-item">
+                                <span data-translate="clean-tidy">Asegúrate de que todo esté limpio y ordenado</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Important Section -->
+            <section class="section">
+                <div class="alert alert-warning">
+                    <span>⚠️</span>
+                    <div>
+                        <strong data-translate="important-title">IMPORTANTE</strong><br>
+                        <span data-translate="report-issues">Reporta cualquier problema inmediatamente. Si no nos avisas, no podremos solucionarlo para el siguiente huésped y esto puede generar cargos adicionales.</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Additional Info + Contact Combined Section -->
+            <section class="section">
+                <div class="combined-section">
+                    <div class="section-box">
+                        <div class="section-header">
+                            <span class="section-icon">🔇</span>
+                            <h2 class="section-title" data-translate="additional-title">INFORMACIÓN ADICIONAL</h2>
+                        </div>
+
+                        <div class="video-card">
+                            <div class="video-wrapper">
+                                <iframe src="https://www.youtube.com/embed/GdKKzU4MNEw?controls=0&modestbranding=1&rel=0" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-info">
+                                <h3 class="video-title" data-translate="noise-title">Cómo mitigar el ruido del generador</h3>
+                                <p class="video-description" data-translate="noise-desc">Video tutorial para reducir ruidos externos (si es necesario)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-box">
+                        <div class="section-header">
+                            <span class="section-icon">📞</span>
+                            <h2 class="section-title" data-translate="contact-title">CONTACTO Y UBICACIÓN</h2>
+                        </div>
+
+                        <div class="contact-section">
+                            <h3 data-translate="address-title">📍 Calle Alcanfores 957 Dpto 202, Miraflores, Lima, Perú</h3>
+                            
+                            <div class="contact-card" style="margin-top: 24px;">
+                                <h4 data-translate="need-help">💬 ¿Necesitas ayuda?</h4>
+                                <p data-translate="airbnb-app">ABRE TU APP DE AIRBNB<br>Estaré atento a tus mensajes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            es: {
+                'welcome': '¡Bienvenidos!',
+                'subtitle': 'Estas son las reglas para tu Airbnb',
+                'essential-info': 'INFORMACIÓN <span style="color: #e74c3c;">OBLIGATORIA</span> ESENCIAL DE LLEGADA',
+                'safe-box-title': 'Cómo abrir la caja de seguridad',
+                'safe-box-desc': 'Video sin audio con los pasos básicos (7 segundos - Loop infinito)',
+                'entry-title': 'Cómo ingresar al departamento',
+                'entry-desc': 'Tutorial detallado paso a paso (1 minuto)',
+                'checkin-time': 'A partir de las 3:00 PM',
+                'checkout-time': '10:00 AM último día',
+                'max-people': 'Máximo 4 personas permitidas:',
+                'main-bed': '2 personas en cama matrimonial (dormitorio principal)',
+                'bunk-bed': '2 personas en cama nido (una arriba, otra abajo)',
+                'no-tolerance': 'IMPORTANTE: No habrá tolerancias de espera, necesitamos tiempo para preparar el departamento para el siguiente huésped.',
+                'wifi-title': 'CREDENCIALES WIFI',
+                'wifi-24': 'Red 2.4GHz • Mayor alcance • Menos velocidad',
+                'wifi-5': 'Red 5GHz • Menos alcance • Más velocidad',
+                'password': 'Contraseña para ambas:',
+                'password-note': '(Con B mayúscula)',
+                'hot-water-title': 'TUTORIALES DE AGUA CALIENTE',
+                'p8-warning': 'NO USAR POTENCIA 8 (P8) EN LAS THERMAS',
+                'p8-consequence': 'De hacerlo, se puede ir la luz en todo el departamento por el alto consumo eléctrico',
+                'shower-main-title': '¿Cómo ducharse con agua caliente?',
+                'shower-main-desc': 'Tutorial para el baño principal (1 minuto)',
+                'shower-master-title': '¿Y en el Dormitorio Principal?',
+                'shower-master-desc': 'Tutorial para el baño del dormitorio principal (1 minuto)',
+                'important-rules': 'Reglas importantes:',
+                'no-fridge-therma': 'NO uses la therma ubicada al lado del refrigerador',
+                'use-bathroom-therma': 'Usa solo las thermas ubicadas en cada baño',
+                'never-p8': 'NUNCA uses Potencia 8 (P8)',
+                'entertainment-title': 'ENTRETENIMIENTO',
+                'tv-title': 'Cómo usar la TV',
+                'tv-desc': 'En nuestros smart TVs podrás configurar tus cuentas favoritas: Netflix, Prime Video, etc.',
+                'rules-title': 'REGLAS DE CONVIVENCIA',
+                'silent-hours': 'Horarios de Silencio',
+                'respect-neighbors': 'Respeta a los vecinos. En Miraflores hay límites de decibeles con sanciones municipales.',
+                'trash-title': 'Manejo de Basura',
+                'trash-step1': 'Ve al sótano (presiona "L" en el ascensor)',
+                'trash-step2': 'Al salir, busca la puerta roja a la izquierda',
+                'trash-step3': 'Deposita la basura en el contenedor del edificio',
+                'no-smoking': 'Prohibido Fumar/Vapear',
+                'smoke-detection': 'Las alarmas de humo detectan cualquier tipo de humo dentro y fuera del edificio.',
+                'cleaning-title': 'Limpieza y Orden',
+                'cleaning-supplies': 'Instrumentos de limpieza: debajo del lavabo de la cocina',
+                'clothesline': 'Tendedero plegable: frente al refrigerador',
+                'no-window-drying': 'Prohibido: secar ropa en ventanas',
+                'towel-rule': 'Prohibido: usar toallas de manos para los pies (costo de reposición)',
+                'no-parties': 'No Fiestas',
+                'no-loud-gatherings': 'Las reuniones ruidosas no están permitidas en ningún momento.',
+                'no-pets': 'No Mascotas',
+                'pets-explanation': 'Amamos a las mascotas, pero nuestro espacio no está preparado para recibirlas.',
+                'checkout-title': 'AL SALIR',
+                'close-doors': 'Cierra todas las puertas y ventanas',
+                'leave-key': 'Deja la llave en la caja de seguridad donde la encontraste',
+                'clean-tidy': 'Asegúrate de que todo esté limpio y ordenado',
+                'contact-title': 'CONTACTO Y UBICACIÓN',
+                'address-title': '📍 Calle Alcanfores 957 Dpto 202, Miraflores, Lima, Perú',
+                'need-help': '💬 ¿Necesitas ayuda?',
+                'airbnb-app': 'ABRE TU APP DE AIRBNB<br>Estaré atento a tus mensajes',
+                'important-title': 'IMPORTANTE',
+                'report-issues': 'Reporta cualquier problema inmediatamente. Si no nos avisas, no podremos solucionarlo para el siguiente huésped y esto puede generar cargos adicionales.',
+                'additional-title': 'INFORMACIÓN ADICIONAL',
+                'noise-title': 'Cómo mitigar el ruido del generador',
+                'noise-desc': 'Video tutorial para reducir ruidos externos (si es necesario)'
+            },
+            en: {
+                'welcome': 'Welcome!',
+                'subtitle': 'These are the rules for your Airbnb',
+                'essential-info': '<span style="color: #e74c3c;">MANDATORY</span> ESSENTIAL ARRIVAL INFORMATION',
+                'safe-box-title': 'How to open the safe box',
+                'safe-box-desc': 'Silent video with basic steps (7 seconds - Infinite loop)',
+                'entry-title': 'How to enter the apartment',
+                'entry-desc': 'Detailed step-by-step tutorial (1 minute)',
+                'checkin-time': 'From 3:00 PM onwards',
+                'checkout-time': '10:00 AM last day',
+                'max-people': 'Maximum 4 people allowed:',
+                'main-bed': '2 people in double bed (main bedroom)',
+                'bunk-bed': '2 people in trundle bed (one on top, one below)',
+                'no-tolerance': 'IMPORTANT: There will be no waiting tolerances, we need time to prepare the apartment for the next guest.',
+                'wifi-title': 'WIFI CREDENTIALS',
+                'wifi-24': '2.4GHz Network • Greater range • Less speed',
+                'wifi-5': '5GHz Network • Less range • More speed',
+                'password': 'Password for both:',
+                'password-note': '(Capital B)',
+                'hot-water-title': 'HOT WATER TUTORIALS',
+                'p8-warning': 'DO NOT USE POWER 8 (P8) ON WATER HEATERS',
+                'p8-consequence': 'Doing so may cause a power outage in the entire apartment due to high electricity consumption',
+                'shower-main-title': 'How to shower with hot water?',
+                'shower-main-desc': 'Tutorial for the main bathroom (1 minute)',
+                'shower-master-title': 'What about the Master Bedroom?',
+                'shower-master-desc': 'Tutorial for the master bedroom bathroom (1 minute)',
+                'important-rules': 'Important rules:',
+                'no-fridge-therma': 'DO NOT use the water heater located next to the refrigerator',
+                'use-bathroom-therma': 'Use only the water heaters located in each bathroom',
+                'never-p8': 'NEVER use Power 8 (P8)',
+                'entertainment-title': 'ENTERTAINMENT',
+                'tv-title': 'How to use the TV',
+                'tv-desc': 'On our smart TVs you can configure your favorite accounts: Netflix, Prime Video, etc.',
+                'rules-title': 'COEXISTENCE RULES',
+                'silent-hours': 'Quiet Hours',
+                'respect-neighbors': 'Respect your neighbors. In Miraflores there are decibel limits with municipal sanctions.',
+                'trash-title': 'Trash Management',
+                'trash-step1': 'Go to the basement (press "L" in the elevator)',
+                'trash-step2': 'When exiting, look for the red door on the left',
+                'trash-step3': 'Deposit trash in the building container',
+                'no-smoking': 'No Smoking/Vaping',
+                'smoke-detection': 'Smoke alarms detect any type of smoke inside and outside the building.',
+                'cleaning-title': 'Cleaning and Order',
+                'cleaning-supplies': 'Cleaning supplies: under the kitchen sink',
+                'clothesline': 'Folding clothesline: in front of the refrigerator',
+                'no-window-drying': 'Forbidden: drying clothes on windows',
+                'towel-rule': 'Forbidden: using hand towels for feet (replacement cost)',
+                'no-parties': 'No Parties',
+                'no-loud-gatherings': 'Loud gatherings are not allowed at any time.',
+                'no-pets': 'No Pets',
+                'pets-explanation': 'We love pets, but our space is not prepared to receive them.',
+                'checkout-title': 'UPON LEAVING',
+                'close-doors': 'Close all doors and windows',
+                'leave-key': 'Leave the key in the safe box where you found it',
+                'clean-tidy': 'Make sure everything is clean and tidy',
+                'contact-title': 'CONTACT AND LOCATION',
+                'address-title': '📍 Alcanfores Street 957 Apt 202, Miraflores, Lima, Peru',
+                'need-help': '💬 Need help?',
+                'airbnb-app': 'OPEN YOUR AIRBNB APP<br>I will be attentive to your messages',
+                'important-title': 'IMPORTANT',
+                'report-issues': 'Report any problem immediately. If you don\'t tell us, we won\'t be able to fix it for the next guest and this may incur additional charges.',
+                'additional-title': 'ADDITIONAL INFORMATION',
+                'noise-title': 'How to mitigate generator noise',
+                'noise-desc': 'Video tutorial to reduce external noise (if necessary)'
+            }
+        };
+
+        let currentLang = 'es';
+
+        // Esperar a que el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', function() {
+            const languageToggle = document.getElementById('language-toggle');
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            
+            if (languageToggle) {
+                languageToggle.addEventListener('change', function() {
+                    currentLang = currentLang === 'es' ? 'en' : 'es';
+                    translatePage();
+                    toggleVideos();
+                });
+            }
+
+            // Scroll to top functionality
+            if (scrollToTopBtn) {
+                // Show/hide button based on scroll position
+                window.addEventListener('scroll', function() {
+                    if (window.pageYOffset > 300) {
+                        scrollToTopBtn.classList.add('visible');
+                    } else {
+                        scrollToTopBtn.classList.remove('visible');
+                    }
+                });
+
+                // Scroll to top when clicked
+                scrollToTopBtn.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        });
+
+        function translatePage() {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[currentLang][key]) {
+                    element.innerHTML = translations[currentLang][key];
+                }
+            });
+            
+            document.documentElement.lang = currentLang;
+        }
+
+        function toggleVideos() {
+            const esVideos = document.querySelectorAll('.video-es');
+            const enVideos = document.querySelectorAll('.video-en');
+            
+            if (currentLang === 'en') {
+                esVideos.forEach(video => video.classList.add('hidden'));
+                enVideos.forEach(video => video.classList.remove('hidden'));
+            } else {
+                esVideos.forEach(video => video.classList.remove('hidden'));
+                enVideos.forEach(video => video.classList.add('hidden'));
+            }
+        }
+
+        // Smooth scrolling for better UX
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
