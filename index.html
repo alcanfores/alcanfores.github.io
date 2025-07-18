@@ -666,35 +666,129 @@
             placeholder.parentNode.replaceChild(iframe, placeholder);
         }
 
-        // Function to reload videos when language changes
-        function reloadVideos() {
-            // Find all existing iframes and replace them with placeholders again
-            document.querySelectorAll('.video-wrapper iframe').forEach(iframe => {
-                const wrapper = iframe.parentNode;
-                const videoCard = wrapper.closest('.video-card');
-                
-                // Get the original data attributes from the video card
-                const placeholder = document.createElement('div');
-                placeholder.className = 'video-placeholder';
-                
-                // Find the original data attributes by looking at sibling elements or parent structure
-                const existingPlaceholder = videoCard.querySelector('.video-placeholder');
-                if (existingPlaceholder) {
-                    placeholder.dataset.videoEs = existingPlaceholder.dataset.videoEs;
-                    placeholder.dataset.videoEn = existingPlaceholder.dataset.videoEn;
-                    placeholder.dataset.titleEs = existingPlaceholder.dataset.titleEs;
-                    placeholder.dataset.titleEn = existingPlaceholder.dataset.titleEn;
-                } else {
-                    // Fallback: extract from iframe src or use defaults
-                    const currentSrc = iframe.src;
-                    placeholder.dataset.videoEs = currentSrc;
-                    placeholder.dataset.videoEn = currentSrc;
-                    placeholder.dataset.titleEs = iframe.title || 'Video tutorial';
-                    placeholder.dataset.titleEn = iframe.title || 'Video tutorial';
+        // Global variable to store the video observer
+        let videoObserver;
+
+        // Function to setup video observer
+        function setupVideoObserver() {
+            if ('IntersectionObserver' in window) {
+                // Disconnect existing observer if it exists
+                if (videoObserver) {
+                    videoObserver.disconnect();
                 }
                 
-                wrapper.replaceChild(placeholder, iframe);
+                videoObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const placeholder = entry.target;
+                            // Auto-load videos when they're 50% visible
+                            setTimeout(() => loadVideo(placeholder), 500);
+                            videoObserver.unobserve(placeholder);
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                // Observe all current video placeholders
+                document.querySelectorAll('.video-placeholder').forEach(placeholder => {
+                    videoObserver.observe(placeholder);
+                });
+            }
+        }
+
+        // Function to reload videos when language changes
+        function reloadVideos() {
+            // Store original data for recreation
+            const videoData = [];
+            
+            // Collect data from all video wrappers
+            document.querySelectorAll('.video-wrapper').forEach(wrapper => {
+                const iframe = wrapper.querySelector('iframe');
+                const placeholder = wrapper.querySelector('.video-placeholder');
+                
+                if (iframe || placeholder) {
+                    // Get data from whichever element exists
+                    const dataSource = placeholder || iframe.closest('.video-card');
+                    const videoCard = wrapper.closest('.video-card');
+                    
+                    // Extract data attributes from the original HTML structure
+                    let videoEs, videoEn, titleEs, titleEn;
+                    
+                    if (placeholder) {
+                        videoEs = placeholder.dataset.videoEs;
+                        videoEn = placeholder.dataset.videoEn;
+                        titleEs = placeholder.dataset.titleEs;
+                        titleEn = placeholder.dataset.titleEn;
+                    } else {
+                        // Determine video URLs based on known patterns
+                        const currentSrc = iframe.src;
+                        
+                        // Map known video IDs to their counterparts
+                        const videoMappings = {
+                            // Safe box videos (same for both languages)
+                            '7qMZbH_MPsc': { es: '7qMZbH_MPsc', en: '7qMZbH_MPsc' },
+                            // Entry videos
+                            'NFQsJut8Dgw': { es: 'NFQsJut8Dgw', en: 'Rse93vMWeU0' },
+                            'Rse93vMWeU0': { es: 'NFQsJut8Dgw', en: 'Rse93vMWeU0' },
+                            // Hot water main bathroom
+                            'IhaZ4NbX0mY': { es: 'IhaZ4NbX0mY', en: '8TlMmhSkFoE' },
+                            '8TlMmhSkFoE': { es: 'IhaZ4NbX0mY', en: '8TlMmhSkFoE' },
+                            // Hot water master bedroom
+                            'x53JCNqUiC4': { es: 'x53JCNqUiC4', en: 'uA9nS7JYoTI' },
+                            'uA9nS7JYoTI': { es: 'x53JCNqUiC4', en: 'uA9nS7JYoTI' },
+                            // Entertainment (same for both)
+                            'jYw3l-NhX20': { es: 'jYw3l-NhX20', en: 'jYw3l-NhX20' },
+                            // Generator noise (same for both)
+                            'GdKKzU4MNEw': { es: 'GdKKzU4MNEw', en: 'GdKKzU4MNEw' }
+                        };
+                        
+                        // Extract video ID from current src
+                        const videoIdMatch = currentSrc.match(/embed\/([^?]+)/);
+                        const currentVideoId = videoIdMatch ? videoIdMatch[1] : null;
+                        
+                        if (currentVideoId && videoMappings[currentVideoId]) {
+                            const mapping = videoMappings[currentVideoId];
+                            videoEs = currentSrc.replace(currentVideoId, mapping.es);
+                            videoEn = currentSrc.replace(currentVideoId, mapping.en);
+                        } else {
+                            // Fallback to current src for both
+                            videoEs = currentSrc;
+                            videoEn = currentSrc;
+                        }
+                        
+                        titleEs = iframe.title || 'Video tutorial';
+                        titleEn = iframe.title || 'Video tutorial';
+                    }
+                    
+                    videoData.push({
+                        wrapper: wrapper,
+                        videoEs: videoEs,
+                        videoEn: videoEn,
+                        titleEs: titleEs,
+                        titleEn: titleEn
+                    });
+                }
             });
+            
+            // Replace all iframes with new placeholders
+            videoData.forEach(data => {
+                const { wrapper, videoEs, videoEn, titleEs, titleEn } = data;
+                
+                // Clear wrapper content
+                wrapper.innerHTML = '';
+                
+                // Create new placeholder with correct data
+                const placeholder = document.createElement('div');
+                placeholder.className = 'video-placeholder';
+                placeholder.dataset.videoEs = videoEs;
+                placeholder.dataset.videoEn = videoEn;
+                placeholder.dataset.titleEs = titleEs;
+                placeholder.dataset.titleEn = titleEn;
+                
+                wrapper.appendChild(placeholder);
+            });
+            
+            // Re-setup the video observer for the new placeholders
+            setupVideoObserver();
         }
 
         // Event delegation for performance
@@ -749,24 +843,8 @@
                 });
             }
 
-            // Intersection Observer for lazy loading videos when they come into view
-            if ('IntersectionObserver' in window) {
-                const videoObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const placeholder = entry.target;
-                            // Auto-load videos when they're 50% visible
-                            setTimeout(() => loadVideo(placeholder), 500);
-                            videoObserver.unobserve(placeholder);
-                        }
-                    });
-                }, { threshold: 0.5 });
-
-                // Observe all video placeholders
-                document.querySelectorAll('.video-placeholder').forEach(placeholder => {
-                    videoObserver.observe(placeholder);
-                });
-            }
+            // Initial setup of video observer
+            setupVideoObserver();
         });
 
         function translatePage() {
