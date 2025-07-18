@@ -644,7 +644,7 @@
 
         let currentLang = 'es';
 
-        // Optimized lazy video loading
+        // Optimized lazy video loading with language support
         function loadVideo(placeholder) {
             const videoUrl = currentLang === 'es' ? placeholder.dataset.videoEs : placeholder.dataset.videoEn;
             const title = currentLang === 'es' ? placeholder.dataset.titleEs : placeholder.dataset.titleEn;
@@ -666,6 +666,37 @@
             placeholder.parentNode.replaceChild(iframe, placeholder);
         }
 
+        // Function to reload videos when language changes
+        function reloadVideos() {
+            // Find all existing iframes and replace them with placeholders again
+            document.querySelectorAll('.video-wrapper iframe').forEach(iframe => {
+                const wrapper = iframe.parentNode;
+                const videoCard = wrapper.closest('.video-card');
+                
+                // Get the original data attributes from the video card
+                const placeholder = document.createElement('div');
+                placeholder.className = 'video-placeholder';
+                
+                // Find the original data attributes by looking at sibling elements or parent structure
+                const existingPlaceholder = videoCard.querySelector('.video-placeholder');
+                if (existingPlaceholder) {
+                    placeholder.dataset.videoEs = existingPlaceholder.dataset.videoEs;
+                    placeholder.dataset.videoEn = existingPlaceholder.dataset.videoEn;
+                    placeholder.dataset.titleEs = existingPlaceholder.dataset.titleEs;
+                    placeholder.dataset.titleEn = existingPlaceholder.dataset.titleEn;
+                } else {
+                    // Fallback: extract from iframe src or use defaults
+                    const currentSrc = iframe.src;
+                    placeholder.dataset.videoEs = currentSrc;
+                    placeholder.dataset.videoEn = currentSrc;
+                    placeholder.dataset.titleEs = iframe.title || 'Video tutorial';
+                    placeholder.dataset.titleEn = iframe.title || 'Video tutorial';
+                }
+                
+                wrapper.replaceChild(placeholder, iframe);
+            });
+        }
+
         // Event delegation for performance
         document.addEventListener('click', function(e) {
             if (e.target.classList.contains('video-placeholder') || e.target.closest('.video-placeholder')) {
@@ -683,6 +714,11 @@
                 languageToggle.addEventListener('change', function() {
                     currentLang = currentLang === 'es' ? 'en' : 'es';
                     translatePage();
+                    // Reload videos to show correct language version
+                    reloadVideos();
+                    
+                    // Update video placeholder text based on language
+                    updateVideoPlaceholders();
                 });
             }
 
@@ -742,6 +778,24 @@
             });
             
             document.documentElement.lang = currentLang;
+        }
+
+        function updateVideoPlaceholders() {
+            const style = document.createElement('style');
+            if (currentLang === 'en') {
+                style.textContent = '.video-placeholder::after { content: "▶ Load Video"; }';
+            } else {
+                style.textContent = '.video-placeholder::after { content: "▶ Cargar Video"; }';
+            }
+            
+            // Remove any existing placeholder style
+            const existingStyle = document.querySelector('#placeholder-style');
+            if (existingStyle) {
+                existingStyle.remove();
+            }
+            
+            style.id = 'placeholder-style';
+            document.head.appendChild(style);
         }
 
         // Smooth scrolling enhancement
