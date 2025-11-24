@@ -241,15 +241,7 @@ details[open] summary{color:var(--acc)}
                             <span class="vt-sub" data-t="click-view">Click para ver tutorial</span>
                         </div>
                     </div>
-                    
-                    <div class="video-trigger" onclick="openModal('noise')" style="background:#f9f9f9">
-                        <div class="play-icon" style="background:#333">▶</div>
-                        <div>
-                            <div class="vt-text" data-t="noise-title">📉 Mitigar Ruido Generador</div>
-                            <span class="vt-sub" data-t="click-view">Click para ver tutorial</span>
-                        </div>
                     </div>
-                </div>
 
                 <div class="prohibitions">
                     <div class="no-tag">🚫🎉 <span data-t="no-party">No Fiestas</span></div>
@@ -264,9 +256,9 @@ details[open] summary{color:var(--acc)}
             <div class="card">
                 <p style="margin-bottom:16px; font-weight:600" data-t="out-intro">Al salir, por favor:</p>
                 <ol class="step-list">
-                    <li data-t="st1">Cierra ventanas y puertas.</li>
-                    <li data-t="st2">Deja la llave en la caja de seguridad.</li>
-                    <li data-t="st3">Apaga las luces.</li>
+                    <li data-t="st1">Apaga las luces.</li>
+                    <li data-t="st2">Cierra ventanas y puertas.</li>
+                    <li data-t="st3">Deja la llave en la caja de seguridad.</li>
                     <li data-t="st4">Avisa por WhatsApp tu salida.</li>
                 </ol>
             </div>
@@ -299,10 +291,10 @@ const D = {
         b1: "Baño Principal", b2: "Baño Dormitorio",
         "rul-t": "🏠 Convivencia", sil: "Silencio", "sil-txt": "10:00 PM - 07:00 AM.<br>Por favor respeta el descanso de los vecinos.",
         trash: "Basura", "trash-txt": "Sótano 1 [Presionar (L) en Ascensor], puerta NEGRA a la izquierda.",
-        "tv-title": "📺 Uso de TV Smart", "noise-title": "📉 Mitigar Ruido Generador", "click-view": "Click para ver tutorial",
+        "tv-title": "📺 Uso de TV Smart", "click-view": "Click para ver tutorial",
         "no-party": "No Fiestas", "no-smoke": "No Fumar", "no-pets": "No Mascotas",
         "out-t": "👋 Checkout", "out-intro": "Al salir, por favor:",
-        st1: "Cierra ventanas y puertas.", st2: "Deja llave en caja de seguridad.", st3: "Apaga luces.", st4: "Avisa por WhatsApp."
+        st1: "Apaga las luces.", st2: "Cierra ventanas y puertas.", st3: "Deja la llave en la caja de seguridad.", st4: "Avisa por WhatsApp tu salida."
     },
     en: {
         welcome: "Welcome", "nav-arr":"Check-in", "nav-wat":"Water",
@@ -313,10 +305,10 @@ const D = {
         b1: "Main Bath", b2: "Master Bath",
         "rul-t": "🏠 House Rules", sil: "Quiet Hours", "sil-txt": "10:00 PM - 07:00 AM.<br>Please respect the neighbors' rest.",
         trash: "Trash", "trash-txt": "Basement 1 [Press (L) in Elevator], BLACK door on the left.",
-        "tv-title": "📺 Smart TV Usage", "noise-title": "📉 Generator Noise", "click-view": "Click to watch tutorial",
+        "tv-title": "📺 Smart TV Usage", "click-view": "Click to watch tutorial",
         "no-party": "No Parties", "no-smoke": "No Smoking", "no-pets": "No Pets",
         "out-t": "👋 Checkout", "out-intro": "Before leaving:",
-        st1: "Close windows and doors.", st2: "Leave key in safe box.", st3: "Turn off lights.", st4: "Notify via WhatsApp."
+        st1: "Turn off lights.", st2: "Close windows and doors.", st3: "Leave key in safe box.", st4: "Notify via WhatsApp."
     }
 };
 
@@ -324,8 +316,7 @@ const VIDS = {
     entry: {es: "NFQsJut8Dgw", en: "Rse93vMWeU0"},
     b1: {es: "IhaZ4NbX0mY", en: "8TlMmhSkFoE"},
     b2: {es: "x53JCNqUiC4", en: "uA9nS7JYoTI"},
-    tv: {es: "jYw3l-NhX20", en: "jYw3l-NhX20"},
-    noise: {es: "GdKKzU4MNEw", en: "GdKKzU4MNEw"}
+    tv: {es: "jYw3l-NhX20", en: "jYw3l-NhX20"}
 };
 
 let curLang = 'es';
